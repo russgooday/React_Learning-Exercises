@@ -1,12 +1,17 @@
 const React = (() => {
+  // states will be stored in an array
+  // guaranteeing that each call to useState returns
+  // with a reference to its own distinct state
   const state = []
   let index = 0
 
   const useState = (initVal) => {
     state[index] = state[index] ?? initVal
-    // need to make sure when setState is invoked
-    // it is called with the correct index
-    const setState = ((i) => (val) => { state[i] = val })(index)
+    // Note: React.render resets the outer index to 0
+    // To make sure when setState is invoked it uses
+    // the correct index it is provided with a local copy.
+    const localIndex = index
+    const setState = (val) => { state[localIndex] = val }
 
     // return state, incrementing index each time
     return [state[index++], setState]
