@@ -46,7 +46,7 @@ const Component = (props) => {
     return {
         render: () => console.log({ count, text }),
         click: () => setCount(count + 1),
-        type: (word) => setText(word)
+        type: setText
     }
 }
 
